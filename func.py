@@ -12,7 +12,7 @@ def forwardSelection(numOfFeatures):
 
     # add feature numbers here based on number of features chosen by user
     for i in range(0, numOfFeatures):
-        features.append(i+1)
+        features.append(i+1) #adding features 0 to numOfFeatures into features list
 
     # loop until there are no more features to add
     while(len(features) != 0):
@@ -49,3 +49,7 @@ def forwardSelection(numOfFeatures):
                     print(",", sep = "", end="")
             print("} was best, accuracy is ", highestAccuracy, "%.\n", sep = "",)
             accuracyFlag = 0
+
+def backwardSelection(numOfFeatures):
+    pass
+
