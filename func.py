@@ -64,7 +64,7 @@ def backwardSelection(numOfFeatures):
     highestAccuracy = round(random.random() * 100,1) 
     featuresWithHighestAccuracy = []
     accuracyFlag = 0
-    print("Using all features and ", random, " evaluation, I get an accuracy of ", highestAccuracy, "%.\n", sep = "")
+    print("Using all features and \"random\" evaluation, I get an accuracy of ", highestAccuracy, "%.\n", sep = "")
 
     print("Beginning Search.\n")
 
