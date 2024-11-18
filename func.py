@@ -56,7 +56,6 @@ def forwardSelection(numOfFeatures):
         else:
             features.remove(feature)
             featuresWithHighestAccuracy.append(feature)
-            print("\n Feature Set {", end="")
             printBest(featuresWithHighestAccuracy, highestAccuracy)
             accuracyFlag = 0
 
