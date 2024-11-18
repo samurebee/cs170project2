@@ -5,7 +5,7 @@ import func
 while True:
     numFeatures = input("Please enter total number of features: ")
     try:
-        val = int(numFeatures)
+        numFeatures = int(numFeatures)
         break
     except ValueError:
         print("Please enter a integer")
@@ -13,7 +13,7 @@ while True:
 while True:
     numberAlgorithm = input("\nForward Selection(1)\nBacward Elimination(2)\nSpecial Algorithm(3)\nEnter:")
     try:
-        val = int(numberAlgorithm)
+        numberAlgorithm = int(numberAlgorithm)
         break
     except ValueError:
         print("Please enter a integer")
