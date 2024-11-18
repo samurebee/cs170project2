@@ -1,5 +1,26 @@
 import random
 
+def inputFeatures(features, numOfFeatures):
+    for i in range(0, numOfFeatures):
+        features.append(i+1) #adding features 0 to numOfFeatures into features list
+
+def printFeatures(features):
+    for i in range(0,len(features)):
+        print(features[i], sep = "", end="")
+        if(i != len(features) - 1):
+            print(",", sep = "", end="")
+
+def printWarning(features, highestAccuracy):
+    print("\n(Warning, Accuracy has decreased!)")
+    print("Finished Search!! The best feature subset is {", end="")
+    printFeatures(features)
+    print("}, which has an accuracy of ", highestAccuracy, "%.\n", sep = "",)
+
+def printBest(features, highestAccuracy):
+    print("\n Feature Set {", end="")
+    printFeatures(features)
+    print("} was best, accuracy is ", highestAccuracy, "%.\n", sep = "",)
+
 def forwardSelection(numOfFeatures):
 
     features = [] # list to know what features could be added
@@ -11,8 +32,7 @@ def forwardSelection(numOfFeatures):
     print("Beginning Search.\n")
 
     # add feature numbers here based on number of features chosen by user
-    for i in range(0, numOfFeatures):
-        features.append(i+1) #adding features 0 to numOfFeatures into features list
+    inputFeatures(features, numOfFeatures)
 
     # loop until there are no more features to add
     while(len(features) != 0):
@@ -30,24 +50,14 @@ def forwardSelection(numOfFeatures):
                 highestAccuracy = accuracy # modify highest accuracy
         # if accuracy does not increase finish the search
         if(accuracyFlag == 0):
-            print("\n(Warning, Accuracy has decreased!)")
-            print("Finished Search!! The best feature subset is {", end="")
-            for i in range(0,len(featuresWithHighestAccuracy)):
-                print(featuresWithHighestAccuracy[i], sep = "", end="")
-                if(i != len(featuresWithHighestAccuracy) - 1):
-                    print(",", sep = "", end="")
-            print("}, which has an accuracy of ", highestAccuracy, "%.\n", sep = "",)
+            printWarning(featuresWithHighestAccuracy, highestAccuracy)
             break
         # if accuracy increases print set of features with highest accuracy so far and continue search
         else:
             features.remove(feature)
             featuresWithHighestAccuracy.append(feature)
             print("\n Feature Set {", end="")
-            for i in range(0,len(featuresWithHighestAccuracy)):
-                print(featuresWithHighestAccuracy[i], sep = "", end="")
-                if(i != len(featuresWithHighestAccuracy) - 1):
-                    print(",", sep = "", end="")
-            print("} was best, accuracy is ", highestAccuracy, "%.\n", sep = "",)
+            printBest(featuresWithHighestAccuracy, highestAccuracy)
             accuracyFlag = 0
 
 def backwardSelection(numOfFeatures):
