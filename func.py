@@ -60,5 +60,43 @@ def forwardSelection(numOfFeatures):
             accuracyFlag = 0
 
 def backwardSelection(numOfFeatures):
-    pass
+
+    highestAccuracy = round(random.random() * 100,1) 
+    featuresWithHighestAccuracy = []
+    accuracyFlag = 0
+    print("Using all features and ", random, " evaluation, I get an accuracy of ", highestAccuracy, "%.\n", sep = "")
+
+    print("Beginning Search.\n")
+
+    # populate with all available features
+    inputFeatures(featuresWithHighestAccuracy, numOfFeatures)
+
+    while(len(featuresWithHighestAccuracy) != 0):
+        # iterate through each feature to check accuracy without it
+        for i in range(0,len(featuresWithHighestAccuracy)):
+            accuracy = round(random.random() * 100,1) 
+            print("Removing feature", featuresWithHighestAccuracy[i])
+            print("Using feature(s) {", end ="")
+            # display remaining features
+            for j in range(0,len(featuresWithHighestAccuracy)):
+                if (i != j):
+                    print(featuresWithHighestAccuracy[j], sep = "", end="")
+                    if(i == len(featuresWithHighestAccuracy) - 1 and j == len(featuresWithHighestAccuracy) - 2):
+                        break
+                    if(j != len(featuresWithHighestAccuracy) - 1):
+                        print(",", sep = "", end="")
+            print("} accuracy is ", accuracy, "%.", sep = "")
+            # check if config has higher accuracy than previous best
+            if(accuracy > highestAccuracy):
+                feature = featuresWithHighestAccuracy[i]
+                accuracyFlag = 1
+                highestAccuracy = accuracy
+        # if no better accuracy print warning and stop search
+        if(accuracyFlag == 0):
+            printWarning(featuresWithHighestAccuracy, highestAccuracy)
+            break
+        else:
+            featuresWithHighestAccuracy.remove(feature)
+            printBest(featuresWithHighestAccuracy, highestAccuracy)
+            accuracyFlag = 0
 
