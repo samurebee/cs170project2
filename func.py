@@ -100,3 +100,13 @@ def backwardSelection(numOfFeatures):
             printBest(featuresWithHighestAccuracy, highestAccuracy)
             accuracyFlag = 0
 
+def calculateEuclideanDistance(features, test, train):
+    distance = 0
+    if(isinstance(features,int)):
+        for i in range(0,features):
+            distance += (test[i+1] - train[i+1])  2
+    else:
+        for i in range(0,len(features)):
+            distance += (test[features[i]] - train[features[i]])  2
+    return distance ** 0.5
+
