@@ -1,4 +1,5 @@
 import random
+import pandas as pd
 
 def inputFeatures(features, numOfFeatures):
     for i in range(0, numOfFeatures):
@@ -110,3 +111,10 @@ def calculateEuclideanDistance(features, test, train):
             distance += (test[features[i]] - train[features[i]])  2
     return distance ** 0.5
 
+def getData():
+    df = pd.read_csv("small-test-dataset.txt", sep="\s+", header = None)
+    df_normalized = df.copy()
+    for column in df_normalized:
+        if (column != 0):
+            df_normalized[column] = (df[column] - df[column].mean()) / df[column].std()
+    return df_normalized
