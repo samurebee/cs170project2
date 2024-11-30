@@ -23,3 +23,5 @@ if(numberAlgorithm == 1):
 
 elif(numberAlgorithm == 2):
     func.backwardSelection(numFeatures)
+
+func.NNClassifier([3,5,7])

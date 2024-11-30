@@ -105,10 +105,10 @@ def calculateEuclideanDistance(features, test, train):
     distance = 0
     if(isinstance(features,int)):
         for i in range(0,features):
-            distance += (test[i+1] - train[i+1])  2
+            distance += (test[i+1] - train[i+1]) ** 2
     else:
         for i in range(0,len(features)):
-            distance += (test[features[i]] - train[features[i]])  2
+            distance += (test[features[i]] - train[features[i]]) ** 2
     return distance ** 0.5
 
 def getData():
@@ -118,3 +118,33 @@ def getData():
         if (column != 0):
             df_normalized[column] = (df[column] - df[column].mean()) / df[column].std()
     return df_normalized
+
+def NNClassifier(featuresToUse):
+    accuracy = 0
+    count = 0
+    nearestNeighbor = 0
+    lowestDistance = 0
+    df_normalized = getData()
+    for i in range(0,df_normalized.shape[0]):
+        if((isinstance(featuresToUse,list)) and len(featuresToUse) == 0):
+            break
+        flag = 0
+        test = df_normalized.loc[i]
+        for j in range(0,df_normalized.shape[0]):
+            train = df_normalized.loc[j]
+            if (i != j):
+                if(isinstance(featuresToUse,str)):
+                    distance = calculateEuclideanDistance(df_normalized.shape[1]-1, test, train)
+                else:
+                    distance = calculateEuclideanDistance(featuresToUse, test, train)
+                if (flag == 0):
+                    nearestNeighbor = j
+                    lowestDistance = distance
+                    flag = 1
+                if(distance < lowestDistance):
+                    nearestNeighbor = j
+                    lowestDistance = distance
+        if (test[0] == df_normalized.loc[nearestNeighbor][0]):
+            count += 1
+    accuracy = (count/df_normalized.shape[0]) * 100
+    print("Accuracy: ", accuracy, "%", sep="")
