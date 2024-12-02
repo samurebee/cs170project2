@@ -131,10 +131,12 @@ def NNClassifier(featuresToUse):
     df_normalized = getData()
     if(isinstance(featuresToUse,str)):
         print("Using all features in large dataset")
+    elif((isinstance(featuresToUse,list)) and len(featuresToUse) == 0):
+        print("Using no features in large dataset")
     else:
         print("Using features [", end="")
         printFeatures(featuresToUse)
-        print("] in dataset")
+        print("] in large dataset")
     startTime = time.time()
     for i in range(0,df_normalized.shape[0]):
         if((isinstance(featuresToUse,list)) and len(featuresToUse) == 0):
