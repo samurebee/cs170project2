@@ -24,4 +24,5 @@ import func
 # elif(numberAlgorithm == 2):
 #     func.backwardSelection(numFeatures)
 
-func.NNClassifier([])
+userInput = input("Type in the name of the file to test: ")
+func.NNClassifier([3,5,7], userInput)

@@ -112,8 +112,8 @@ def calculateEuclideanDistance(features, test, train):
             distance += (test[features[i]] - train[features[i]]) ** 2
     return distance ** 0.5
 
-def getData():
-    df = pd.read_csv("large-test-dataset.txt", sep="\s+", header = None)
+def getData(userInput):
+    df = pd.read_csv(userInput, sep="\s+", header = None)
     df_normalized = df.copy()
     startTime = time.time()
     for column in df_normalized:
@@ -123,20 +123,20 @@ def getData():
     print("Time to normalize data:", round(endTime-startTime,2), "seconds")
     return df_normalized
 
-def NNClassifier(featuresToUse):
+def NNClassifier(featuresToUse, userInput):
     accuracy = 0
     count = 0
     nearestNeighbor = 0
     lowestDistance = 0
-    df_normalized = getData()
+    df_normalized = getData(userInput)
     if(isinstance(featuresToUse,str)):
-        print("Using all features in large dataset")
+        print("Using all features in", userInput)
     elif((isinstance(featuresToUse,list)) and len(featuresToUse) == 0):
-        print("Using no features in large dataset")
+        print("Using no features in", userInput)
     else:
         print("Using features [", end="")
         printFeatures(featuresToUse)
-        print("] in large dataset")
+        print("] in", userInput)
     startTime = time.time()
     for i in range(0,df_normalized.shape[0]):
         if((isinstance(featuresToUse,list)) and len(featuresToUse) == 0):
