@@ -1,5 +1,6 @@
 import random
 import pandas as pd
+import time
 
 def inputFeatures(features, numOfFeatures):
     for i in range(0, numOfFeatures):
@@ -112,11 +113,14 @@ def calculateEuclideanDistance(features, test, train):
     return distance ** 0.5
 
 def getData():
-    df = pd.read_csv("small-test-dataset.txt", sep="\s+", header = None)
+    df = pd.read_csv("large-test-dataset.txt", sep="\s+", header = None)
     df_normalized = df.copy()
+    startTime = time.time()
     for column in df_normalized:
         if (column != 0):
             df_normalized[column] = (df[column] - df[column].mean()) / df[column].std()
+    endTime = time.time()
+    print("Time to normalize data:", round(endTime-startTime,2), "seconds")
     return df_normalized
 
 def NNClassifier(featuresToUse):
@@ -125,6 +129,13 @@ def NNClassifier(featuresToUse):
     nearestNeighbor = 0
     lowestDistance = 0
     df_normalized = getData()
+    if(isinstance(featuresToUse,str)):
+        print("Using all features in large dataset")
+    else:
+        print("Using features [", end="")
+        printFeatures(featuresToUse)
+        print("] in dataset")
+    startTime = time.time()
     for i in range(0,df_normalized.shape[0]):
         if((isinstance(featuresToUse,list)) and len(featuresToUse) == 0):
             break
@@ -147,4 +158,6 @@ def NNClassifier(featuresToUse):
         if (test[0] == df_normalized.loc[nearestNeighbor][0]):
             count += 1
     accuracy = (count/df_normalized.shape[0]) * 100
+    endTime = time.time()
+    print("Time to calculate accuracy:", round(endTime-startTime,2), "seconds")
     print("Accuracy: ", accuracy, "%", sep="")

@@ -24,4 +24,4 @@ import func
 # elif(numberAlgorithm == 2):
 #     func.backwardSelection(numFeatures)
 
-func.NNClassifier([3,5,7])
+func.NNClassifier([1,15,27])
