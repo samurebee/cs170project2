@@ -3,9 +3,9 @@ import time
 import numpy as np
 
 
-def inputFeatures(features, numOfFeatures):
-    for i in range(1, numOfFeatures + 1):  # Feature indices start at 1
-        features.append(i)
+# def inputFeatures(features, numOfFeatures):
+#     for i in range(1, numOfFeatures + 1):  # Feature indices start at 1
+#         features.append(i)
 
 
 def printFeatures(features):
@@ -22,7 +22,8 @@ def printWarning(features, highestAccuracy):
 def printBest(features, highestAccuracy):
     print(f"\nFeature set {{", end="")
     printFeatures(features)
-    print(f"}} is best, accuracy is {highestAccuracy:.2f}%")
+    print(f"}} is best, accuracy is {highestAccuracy:.2f}%\n")
+
 
 
 
